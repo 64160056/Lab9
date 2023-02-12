@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CustomersModule } from './customers/customers.module';
 import { Customer } from './customers/entities/customer.entity';
+import { Product } from './products/entities/product.entity';
 import { ProductsModule } from './products/products.module';
 
 @Module({
@@ -14,7 +15,7 @@ import { ProductsModule } from './products/products.module';
       database: 'db.sqlite',
       synchronize: true,
       migrations: [],
-      entities: [Customer],
+      entities: [Customer, Product],
     }),
     CustomersModule,
     ProductsModule,

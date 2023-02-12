@@ -5,9 +5,13 @@ export class Product {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({
+    length: '32',
+  })
   name: string;
 
-  @Column()
+  @Column({
+    type: 'float',
+  })
   price: number;
 }
