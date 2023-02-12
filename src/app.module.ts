@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CustomersModule } from './customers/customers.module';
+import { Customer } from './customers/entities/customer.entity';
 
 @Module({
   imports: [
@@ -11,7 +12,7 @@ import { CustomersModule } from './customers/customers.module';
       database: 'db.sqlite',
       synchronize: true,
       migrations: [],
-      entities: [],
+      entities: [Customer],
     }),
     CustomersModule,
   ],
