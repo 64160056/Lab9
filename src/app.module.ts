@@ -9,6 +9,7 @@ import { Product } from './products/entities/product.entity';
 import { ProductsModule } from './products/products.module';
 import { OrdersModule } from './orders/orders.module';
 import { Order } from './orders/entities/order.entity';
+import { OrderItem } from './orders/entities/order-item';
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { Order } from './orders/entities/order.entity';
       logging: false,
       migrations: [],
       subscribers: [],
-      entities: [Customer, Product, Order],
+      entities: [Customer, Product, Order, OrderItem],
     }),
     CustomersModule,
     ProductsModule,

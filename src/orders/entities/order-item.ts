@@ -1,4 +1,4 @@
-import { Customer } from 'src/customers/entities/customer.entity';
+import { Product } from 'src/products/entities/product.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -7,14 +7,23 @@ import {
   UpdateDateColumn,
   DeleteDateColumn,
   ManyToOne,
-  OneToMany,
 } from 'typeorm';
-import { OrderItem } from './order-item';
+import { Order } from './order.entity';
 
 @Entity()
-export class Order {
+export class OrderItem {
   @PrimaryGeneratedColumn()
   id: number;
+
+  product: Product;
+
+  @Column({
+    length: '32',
+  })
+  name: string;
+
+  @Column({ type: 'float' })
+  price: number;
 
   @Column()
   amount: number;
@@ -22,8 +31,8 @@ export class Order {
   @Column({ type: 'float' })
   total: number;
 
-  @ManyToOne(() => Customer, (customer) => customer.orders)
-  customer: Customer;
+  @ManyToOne(() => Order, (order) => order.orderItems)
+  order: Order;
 
   @CreateDateColumn()
   createdDate: Date;
@@ -33,7 +42,4 @@ export class Order {
 
   @DeleteDateColumn()
   deletedDate: Date;
-
-  @OneToMany(() => OrderItem, (orderItem) => orderItem.order)
-  orderItems: OrderItem[];
 }
