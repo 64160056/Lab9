@@ -13,7 +13,12 @@ export class CustomersService {
   ) {}
 
   create(createCustomerDto: CreateCustomerDto) {
-    return 'This action adds a new customer';
+    const customer: Customer = new Customer();
+    customer.name = createCustomerDto.name;
+    customer.gender = createCustomerDto.gender;
+    customer.age = createCustomerDto.age;
+    customer.tel = createCustomerDto.tel;
+    return this.customersRepository.save(customer);
   }
 
   findAll() {
@@ -21,7 +26,7 @@ export class CustomersService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} customer`;
+    return this.customersRepository.findOneBy({ id: id });
   }
 
   update(id: number, updateCustomerDto: UpdateCustomerDto) {
