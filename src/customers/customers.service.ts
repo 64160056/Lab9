@@ -21,7 +21,7 @@ export class CustomersService {
     return this.customersRepository.save(customer);
   }
 
-  findAll() {
+  findAll(): Promise<Customer[]> {
     return this.customersRepository.find();
   }
 
