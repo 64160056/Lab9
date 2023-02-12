@@ -15,6 +15,7 @@ export class OrderItem {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @ManyToOne(() => Product, (product) => product.orderItems)
   product: Product;
 
   @Column({
