@@ -1,5 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { NotFoundError } from 'rxjs';
 import { Repository } from 'typeorm';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
@@ -13,20 +14,22 @@ export class CustomersService {
   ) {}
 
   create(createCustomerDto: CreateCustomerDto) {
-    const customer: Customer = new Customer();
-    customer.name = createCustomerDto.name;
-    customer.gender = createCustomerDto.gender;
-    customer.age = createCustomerDto.age;
-    customer.tel = createCustomerDto.tel;
-    return this.customersRepository.save(customer);
+    return this.customersRepository.save(createCustomerDto);
   }
 
   findAll() {
     return this.customersRepository.find({});
   }
 
-  findOne(id: number) {
-    return this.customersRepository.findOneBy({ id: id });
+  async findOne(id: number) {
+    const customer = await this.customersRepository.findOne({
+      where: { id: id },
+      relations: ['orders'],
+    });
+    if (!customer) {
+      throw new NotFoundException();
+    }
+    return customer;
   }
 
   async update(id: number, updateCustomerDto: UpdateCustomerDto) {
@@ -37,6 +40,6 @@ export class CustomersService {
 
   async remove(id: number) {
     const customer = await this.customersRepository.findOneBy({ id: id });
-    return this.customersRepository.remove(customer);
+    return this.customersRepository.softRemove(customer);
   }
 }
