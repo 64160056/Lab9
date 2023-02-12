@@ -1,28 +1,25 @@
+import { Customer } from 'src/customers/entities/customer.entity';
 import {
-  Column,
-  CreateDateColumn,
-  DeleteDateColumn,
   Entity,
   PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
   UpdateDateColumn,
+  DeleteDateColumn,
 } from 'typeorm';
 
 @Entity()
-export class Customer {
+export class Order {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  name: string;
+  amount: number;
 
-  @Column()
-  age: number;
+  @Column({ type: 'float' })
+  total: number;
 
-  @Column()
-  tel: string;
-
-  @Column()
-  gender: string;
+  customer: Customer;
 
   @CreateDateColumn()
   createdDate: Date;
