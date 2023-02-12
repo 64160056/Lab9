@@ -8,6 +8,7 @@ import { Customer } from './customers/entities/customer.entity';
 import { Product } from './products/entities/product.entity';
 import { ProductsModule } from './products/products.module';
 import { OrdersModule } from './orders/orders.module';
+import { Order } from './orders/entities/order.entity';
 
 @Module({
   imports: [
@@ -18,7 +19,7 @@ import { OrdersModule } from './orders/orders.module';
       logging: false,
       migrations: [],
       subscribers: [],
-      entities: [Customer, Product],
+      entities: [Customer, Product, Order],
     }),
     CustomersModule,
     ProductsModule,

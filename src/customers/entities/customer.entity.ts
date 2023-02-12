@@ -1,3 +1,4 @@
+import { Order } from 'src/orders/entities/order.entity';
 import {
   Column,
   CreateDateColumn,
@@ -5,6 +6,7 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
 
 @Entity()
@@ -23,6 +25,9 @@ export class Customer {
 
   @Column()
   gender: string;
+
+  @OneToMany(() => Order, (order) => order.customer)
+  orders: Order[];
 
   @CreateDateColumn()
   createdDate: Date;

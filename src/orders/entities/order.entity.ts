@@ -6,6 +6,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
+  ManyToOne,
 } from 'typeorm';
 
 @Entity()
@@ -19,6 +20,7 @@ export class Order {
   @Column({ type: 'float' })
   total: number;
 
+  @ManyToOne(() => Customer, (customer) => customer.orders)
   customer: Customer;
 
   @CreateDateColumn()
