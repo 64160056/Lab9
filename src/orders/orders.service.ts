@@ -11,13 +11,13 @@ export class OrdersService {
     @InjectRepository(Order)
     private ordersRepository: Repository<Order>,
   ) {}
-  
+
   create(createOrderDto: CreateOrderDto) {
     return 'This action adds a new order';
   }
 
   findAll() {
-    return this.ordersRepository.find();
+    return this.ordersRepository.find({ relations: ['customer'] });
   }
 
   findOne(id: number) {
