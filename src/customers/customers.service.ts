@@ -29,8 +29,10 @@ export class CustomersService {
     return this.customersRepository.findOneBy({ id: id });
   }
 
-  update(id: number, updateCustomerDto: UpdateCustomerDto) {
-    return `This action updates a #${id} customer`;
+  async update(id: number, updateCustomerDto: UpdateCustomerDto) {
+    const customer = await this.customersRepository.findOneBy({ id: id });
+    const updatedCustomer = { ...customer, ...updateCustomerDto };
+    return this.customersRepository.save(updatedCustomer);
   }
 
   remove(id: number) {
